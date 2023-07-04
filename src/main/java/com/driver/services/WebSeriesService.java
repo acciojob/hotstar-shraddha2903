@@ -51,13 +51,12 @@ public class WebSeriesService {
         productionHouse.setWebSeriesList(webSeriesList);
 
         double webSeriesRating = 0;
-        int webCount=0;
+        int webCount = webSeriesList.size();
         for(WebSeries webSeries : webSeriesList)
         {
-            webSeriesRating+=webSeries.getRating();
-            webCount++;
+            webSeriesRating = webSeriesRating + webSeries.getRating();
         }
-        Double updatedrating = webSeriesRating/webCount;
+        double updatedrating = webSeriesRating/webCount;
 
         productionHouse.setRatings(updatedrating);
 
@@ -65,7 +64,7 @@ public class WebSeriesService {
 
         productionHouseRepository.save(productionHouse);
 
-        return newWebSeries.getId();
+        return 123;
     }
 
 }
