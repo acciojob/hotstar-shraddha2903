@@ -37,6 +37,7 @@ public class WebSeriesService {
         newWebSeries.setSeriesName(webSeriesEntryDto.getSeriesName());
         newWebSeries.setAgeLimit(webSeriesEntryDto.getAgeLimit());
         newWebSeries.setSubscriptionType(webSeriesEntryDto.getSubscriptionType());
+        newWebSeries.setRating(webSeriesEntryDto.getRating());
 
         //fetching productionHouse
         ProductionHouse productionHouse = productionHouseRepository.findById(webSeriesEntryDto.getProductionHouseId()).get();
