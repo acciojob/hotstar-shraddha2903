@@ -34,7 +34,7 @@ public class WebSeriesService {
             throw new Exception("Series is already present");
         }
         WebSeries newWebSeries = new WebSeries();
-        newWebSeries.setSeriesName(webSeriesOptional.getSeriesName());
+        newWebSeries.setSeriesName(webSeriesEntryDto.getSeriesName());
         newWebSeries.setAgeLimit(webSeriesEntryDto.getAgeLimit());
         newWebSeries.setSubscriptionType(webSeriesEntryDto.getSubscriptionType());
 
