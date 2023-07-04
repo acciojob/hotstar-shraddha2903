@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import static com.driver.model.SubscriptionType.ELITE;
 
@@ -43,17 +44,17 @@ public class SubscriptionService {
         int screenSubscribed = subscriptionEntryDto.getNoOfScreensRequired();
 
         //Basic : 500 + 200 * noOfScreensSubscribed
-        if(subscriptionEntryDto.getSubscriptionType().equals("BASIC"))
+        if(subscriptionEntryDto.getSubscriptionType().equals(SubscriptionType.BASIC))
         {
             amountPaid = 500 + (200 * screenSubscribed);
         }
         //Pro : 800 + 250*noOfScreensSubscribed
-        else if(subscriptionEntryDto.getSubscriptionType().equals("PRO"))
+        else if(subscriptionEntryDto.getSubscriptionType().equals(SubscriptionType.PRO))
         {
             amountPaid = 800 + (250 * screenSubscribed);
         }
         //ELITE Plan : 1000 + 350*noOfScreensSubscribed
-        else if(subscriptionEntryDto.getSubscriptionType().equals("ELITE"))
+        else if(subscriptionEntryDto.getSubscriptionType().equals(ELITE))
         {
             amountPaid = 1000 + (350 * screenSubscribed);
         }
@@ -77,10 +78,13 @@ public class SubscriptionService {
         //If you are already at an ElITE subscription : then throw Exception ("Already the best Subscription")
         //In all other cases just try to upgrade the subscription and tell the difference of price that user has to pay
         //update the subscription in the repository
-        User user = userRepository.findById(userId).get();
-        if(user==null)return 0;
+        Optional<User> userOptional = userRepository.findById(userId);
+        if(!userOptional.isPresent())
+            return 0;
 
-        if(user.getSubscription().equals("ELITE"))
+        User user = userOptional.get();
+
+        if(user.getSubscription().equals(ELITE))
         {
             throw new Exception("Already the best Subscription");
         }
@@ -94,16 +98,16 @@ public class SubscriptionService {
         int amountDiff=0;
         int updatedAmount=0;
 
-        if(user.getSubscription().equals("PRO"))
+        if(user.getSubscription().equals(SubscriptionType.PRO))
         {
             updatedAmount = 1000 + (350 * screenSubscribed);
-            subscription.setSubscriptionType(SubscriptionType.valueOf("ELITE"));
+            subscription.setSubscriptionType(SubscriptionType.ELITE);
             subscription.setTotalAmountPaid(updatedAmount);
         }
-        else if(user.getSubscription().equals("BASIC"))
+        else if(user.getSubscription().equals(SubscriptionType.BASIC))
         {
             updatedAmount = 800 + (250 * screenSubscribed);
-            subscription.setSubscriptionType(SubscriptionType.valueOf("PRO"));
+            subscription.setSubscriptionType(SubscriptionType.PRO);
             subscription.setTotalAmountPaid(updatedAmount);
         }
 
