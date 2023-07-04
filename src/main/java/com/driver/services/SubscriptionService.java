@@ -29,6 +29,7 @@ public class SubscriptionService {
         //code
         //getting user by id
         User user = userRepository.findById(subscriptionEntryDto.getUserId()).get();
+        if (user==null)return 0;
 
         Subscription userSubscription = new Subscription();
         userSubscription.setSubscriptionType(subscriptionEntryDto.getSubscriptionType());
