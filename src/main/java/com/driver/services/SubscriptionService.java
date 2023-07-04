@@ -32,27 +32,31 @@ public class SubscriptionService {
 
         Subscription userSubscription = new Subscription();
         userSubscription.setSubscriptionType(subscriptionEntryDto.getSubscriptionType());
-        userSubscription.setStartSubscriptionDate(new Date());
+//        userSubscription.setStartSubscriptionDate(new Date());
         userSubscription.setNoOfScreensSubscribed(subscriptionEntryDto.getNoOfScreensRequired());
 
         int amountPaid = 0;
 
         int screenSubscribed = subscriptionEntryDto.getNoOfScreensRequired();
-        //Basic : 500 + 200noOfScreensSubscribed
+
+        //Basic : 500 + 200 * noOfScreensSubscribed
         if(subscriptionEntryDto.getSubscriptionType().equals("BASIC"))
         {
-            amountPaid=500 + (200 * screenSubscribed);
+            amountPaid = 500 + (200 * screenSubscribed);
         }
-        //Pro : 800 + 250noOfScreensSubscribed
-        if(subscriptionEntryDto.getSubscriptionType().equals("PRO"))
+        //Pro : 800 + 250*noOfScreensSubscribed
+        else if(subscriptionEntryDto.getSubscriptionType().equals("PRO"))
         {
             amountPaid = 800 + (250 * screenSubscribed);
         }
         //ELITE Plan : 1000 + 350*noOfScreensSubscribed
-        if(subscriptionEntryDto.getSubscriptionType().equals("ELITE"))
+        else if(subscriptionEntryDto.getSubscriptionType().equals("ELITE"))
         {
             amountPaid = 1000 + (350 * screenSubscribed);
         }
+        else
+            return 0;
+
         userSubscription.setTotalAmountPaid(amountPaid);
 
         //mapping user->subscription
