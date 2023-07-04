@@ -82,7 +82,7 @@ public class SubscriptionService {
 
         User user = userOptional.get();
 
-        if(user.getSubscription().equals(SubscriptionType.ELITE))
+        if(user.getSubscription().getSubscriptionType().equals(SubscriptionType.ELITE))
         {
             throw new Exception("Already the best Subscription");
         }
@@ -96,13 +96,13 @@ public class SubscriptionService {
         int amountDiff=0;
         int updatedAmount=0;
 
-        if(user.getSubscription().equals(SubscriptionType.PRO))
+        if(subscription.getSubscriptionType().equals(SubscriptionType.PRO))
         {
             updatedAmount = 1000 + (350 * screenSubscribed);
             subscription.setSubscriptionType(SubscriptionType.ELITE);
             subscription.setTotalAmountPaid(updatedAmount);
         }
-        else if(user.getSubscription().equals(SubscriptionType.BASIC))
+        else if(subscription.getSubscriptionType().equals(SubscriptionType.BASIC))
         {
             updatedAmount = 800 + (250 * screenSubscribed);
             subscription.setSubscriptionType(SubscriptionType.PRO);
