@@ -14,8 +14,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
-import static com.driver.model.SubscriptionType.ELITE;
-
 @Service
 public class SubscriptionService {
 
@@ -54,7 +52,7 @@ public class SubscriptionService {
             amountPaid = 800 + (250 * screenSubscribed);
         }
         //ELITE Plan : 1000 + 350*noOfScreensSubscribed
-        else if(subscriptionEntryDto.getSubscriptionType().equals(ELITE))
+        else if(subscriptionEntryDto.getSubscriptionType().equals(SubscriptionType.ELITE))
         {
             amountPaid = 1000 + (350 * screenSubscribed);
         }
@@ -84,9 +82,9 @@ public class SubscriptionService {
 
         User user = userOptional.get();
 
-        if(user.getSubscription().equals(ELITE))
+        if(user.getSubscription().equals(SubscriptionType.ELITE))
         {
-            throw new RuntimeException("Already the best Subscription");
+            throw new Exception("Already the best Subscription");
         }
 
         Subscription subscription = user.getSubscription();
