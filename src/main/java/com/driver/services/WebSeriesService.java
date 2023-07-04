@@ -40,7 +40,7 @@ public class WebSeriesService {
 
         //fetching productionHouse
         ProductionHouse productionHouse = productionHouseRepository.findById(webSeriesEntryDto.getProductionHouseId()).get();
-        newWebSeries.setProductionHouse(productionHouse);
+        //newWebSeries.setProductionHouse(productionHouse);
 
         //updating production house rating
         List<WebSeries> webSeriesList = productionHouse.getWebSeriesList();
