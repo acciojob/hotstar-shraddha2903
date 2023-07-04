@@ -78,6 +78,7 @@ public class SubscriptionService {
         //In all other cases just try to upgrade the subscription and tell the difference of price that user has to pay
         //update the subscription in the repository
         User user = userRepository.findById(userId).get();
+        if(user==null)return 0;
 
         if(user.getSubscription().equals("ELITE"))
         {
