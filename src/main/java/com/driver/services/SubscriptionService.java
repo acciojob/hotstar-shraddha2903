@@ -86,7 +86,7 @@ public class SubscriptionService {
 
         if(user.getSubscription().equals(ELITE))
         {
-            throw new Exception("Already the best Subscription");
+            throw new RuntimeException("Already the best Subscription");
         }
 
         Subscription subscription = user.getSubscription();
